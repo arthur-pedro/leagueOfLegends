@@ -1,0 +1,24 @@
+PASSO A PASSO:
+
+1 - Descompacta o arquivo
+
+2 - Abre o terminao dentro da pasta do arquivo leagueOfLegends.hs
+
+3 - Inicia o ghci
+
+4 - Roda o arquivo .hs
+
+4.1 - Não precisa criar os arquivos .txt, pois já está incluso na pasta do projeto.[Curiosidade: para criar os arquivos, basta digitar: createDatabase para criar o database.txt e createUserbase para criar o usuarios.txt] depois que  rodar o aarquivo .hs.
+
+5 - Digita "main" para começar pela função main (área de login)
+
+6 - Aqui, pode cadastrar um usuário, logar com um usuário cadastrado ou sair
+
+7 - Pra selecionar as opções, basta digitar o numero referente a opção do menu.
+
+8 - Para logar ou cadastrar, insira o nickname e a senha.
+
+9 - Logado, o usuario pode: Criar, Editar, Apagar, Procurar, Habilitar 
+Campeões ou deslogar (volta para tela principal) ou sair
+
+10 - Aqui, funciona basicamente da mesma forma..
