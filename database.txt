@@ -1,1 +1,1 @@
-[]
+[Campeao "Akali" 3250 "Mago, Assassino" "I\182nia" False,Campeao "Ekko" 6300 "Lutador, Mago" "Piltover" False,Campeao "Draven" 4800 "Atirador" "Noxus" False,Campeao "Garen" 450 "Tank, Lutador" "Dem\223cia" False,Campeao "Velkoz" 6300 "Mago" "Vazio" False,Campeao "Ashe" 450 "Atirador, Suporte" "Freljord" True]

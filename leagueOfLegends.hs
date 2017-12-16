@@ -5,12 +5,12 @@
 import Prelude
 import System.IO
 import System.Exit
---import Data.List.Splitc
 
-
+-- Cria um novo tipo de dado, Um campeão!
 data Campeao = Empty | Campeao String Int String String Bool deriving (Show, Read, Eq)
 type Database = [Campeao]
 
+-- Cria um usuário
 data Usuario = Nulo | Usuario String String deriving (Show, Read, Eq)
 type Userbase = [Usuario]
 
@@ -30,15 +30,16 @@ readDatabase = do
     return database
 
 -- salvar a database
-
 saveDatabase :: Database -> IO ()
 saveDatabase x = do
     handle <- openFile "database.txt" WriteMode
     hPrint handle x
     hClose handle
 
+
 -- SISTEMA DE LOGIN
 
+-- Cria database
 createUserbase :: IO ()
 createUserbase = saveUserbase []
 
@@ -59,6 +60,7 @@ saveUserbase x = do
     hPrint handle x
     hClose handle
 
+-- Cadastra um novo usuário verificando se ja existe um usuário de mesmo nick
 cadastrar :: Usuario -> IO () 
 cadastrar (Usuario nick senha) = do
 	w <- check (nick)
@@ -68,6 +70,7 @@ cadastrar (Usuario nick senha) = do
 			novoUsuario <- readUserbase
 			saveUserbase (novoUsuario++[(Usuario nick senha)])
 
+-- verifica se a entrada é igual a algum nick ja cadastrado para permitir o login
 verificaNick :: String -> IO Usuario
 verificaNick j = do
     novoLogin <- readUserbase
@@ -94,6 +97,7 @@ autenticaNick (Usuario nick senha) = do
             logarInteractive_2
             
 
+-- verifica se a entrada é igual a senha ja cadastrado referente ao nick para permitir o login
 verificaSenha :: String -> IO Usuario
 verificaSenha j = do
     novoLogin <- readUserbase
@@ -146,9 +150,10 @@ inserir (Campeao nome preco funcao reino habilitado) = do
         then putStrLn "\n  Campeao já Habilitado!"
         else do 
             newData <- readDatabase
+            -- salva o novo campeão em um único array array 
             saveDatabase (newData++[(Campeao nome preco funcao reino habilitado)])
 
--- Função de removerr um Pokemon
+-- Remove um Campeão
 remover :: String -> IO ()
 remover n = do
     p <- check (n)
@@ -160,7 +165,7 @@ remover n = do
             where 
             aux (Campeao nome preco funcao reino habilitado) = nome /= n
 
--- Função de procurar um Pokemon
+-- Função de procurar Campeão ja cadastrado
 procurar :: String -> IO Campeao
 procurar p = do
     newData <- readDatabase
@@ -170,7 +175,7 @@ procurar p = do
         else do 
             return (head l)
 
--- Função de atualizar um Pokemon
+-- Função de atualização de Patch.
 atualizar :: Campeao -> IO ()
 atualizar (Campeao nome preco funcao reino habilitado)  = do
     p <- check (nome)
@@ -182,7 +187,7 @@ atualizar (Campeao nome preco funcao reino habilitado)  = do
             putStrLn "\n  Campeao atualizado com sucesso!"
 atualizar a = return ()
 
--- Função de capturar um Pokemon
+-- Função de Comprar um campeão
 habilitar :: String -> IO()
 habilitar nome = do
     p <- check (nome)
@@ -208,7 +213,7 @@ check s = do
 
 -- INTERAÇÃO COM USUÁRIO
  
--- Função que converde um IO em inteiro
+-- Função que converde um IO em inteiro / usada apenas para pegar o preço
 getInt :: IO Int
 getInt = do
     line <- getLine
@@ -234,22 +239,22 @@ printCampeao (Campeao nome preco funcao reino habilitado) = do
                 else do
                     putStrLn "Nao"
 
--- Função que recebe o nome de um Pokemon do usuario
+-- Função que recebe o nome de um campeão do usuario
 getNome = do
     putStr "\n"
-    putStr "Digite nome: "
+    putStr "Digite o nome do Campeão: "
     getLine
 
--- Função que recebe um Pokemon inteiro do usuario
+-- Função que recebe um Campeão inteiro do usuario
 getCampeao = do
     putStr "\n"
-    putStr "Digite nome: "
+    putStr "Digite o nome do Campeão: "
     a <- getLine
-    putStr "Digite Preço: "
+    putStr "Digite o Preço: "
     b <- getInt
     putStr "Digite o(s) Função(s): "
     c <- getLine
-    putStr "Digite reino: "
+    putStr "Digite o reino: "
     d <- getLine
     return (a,b,c,d) 
 
@@ -280,6 +285,8 @@ habilitarInteractive = do
     getNome >>= habilitar
     menu
 
+--LAYOUT
+
 -- Função lagout
 
 lagout = do
@@ -289,16 +296,16 @@ lagout = do
 -- MENU
 menu :: IO()
 menu = do 
-		
+		-- A função "Atualiza Patch edita um campeão"	
         putStr "\n"
         putStrLn "<================================>"
         putStrLn "  BEM-VINDOS A LEAGUE OF LEGENDS  "
         putStrLn "<================================>"
         putStrLn "|      1 - Criar Campeao         |"
-        putStrLn "|      2 - Editar Campeao        |"
+        putStrLn "|      2 - Habilitar Campeao     |"
         putStrLn "|      3 - Apagar Campeao        |"
         putStrLn "|      4 - Procurar Campeao      |"
-        putStrLn "|      5 - Habilitar Campeao     |"
+        putStrLn "|      5 - Atualizar Patch       |"
         putStrLn "|      6 - Lagout                |"
         putStrLn "|      0 - Sair                  |"
         putStrLn "<================================> "
@@ -311,10 +318,10 @@ menu = do
 checkOption :: String -> IO ()
 checkOption opcao 
     |opcao == "1" = inserirInteractive
-    |opcao == "2" = atualizarInteractive
+    |opcao == "2" = habilitarInteractive
     |opcao == "3" = removerInteractive
     |opcao == "4" = procurarInteractive
-    |opcao == "5" = habilitarInteractive
+    |opcao == "5" = atualizarInteractive
     |opcao == "6" = lagout
     |otherwise = exitFailure
 

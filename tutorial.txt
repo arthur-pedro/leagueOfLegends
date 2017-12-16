@@ -1,4 +1,4 @@
-PASSO A PASSO:
+﻿PASSO A PASSO: 
 
 1 - Descompacta o arquivo
 
@@ -22,3 +22,13 @@ PASSO A PASSO:
 Campeões ou deslogar (volta para tela principal) ou sair
 
 10 - Aqui, funciona basicamente da mesma forma..
+
+1 - Criar Campeao - Cria um novo campeão
+2 - Habilitar Campeao  - Compra um novo campeão
+3 - Apagar Campeao - Apaga um Campeão        
+4 - Procurar Campeao - Procura um Campeão      
+5 - Atualizar Patch - Edita as informeções de um campeão       
+6 - Lagout        
+0 - Sair   
+
+https://github.com/arthur-pedro/leagueOfLegends
